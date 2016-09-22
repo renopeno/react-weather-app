@@ -39,12 +39,17 @@ class App extends React.Component {
   };
 
   render() {
-    let currentTemp = ' ';
+    let currentTemp = '';
     let tempSymbol = '';
+    let tempMessage = '';
+    let tempMessageCity = '';
+    const loc = this.state.location;
 
     if (this.state.data.list) {
       currentTemp = this.state.data.list[0].main.temp;
       tempSymbol = '°C';
+      tempMessageCity = loc.charAt(0).toUpperCase() + loc.slice(1,loc.length);
+      tempMessage = 'Current temp in ' + tempMessageCity + ' is';
     }
 
     return (
@@ -61,9 +66,10 @@ class App extends React.Component {
                />
           </label>
         </form>
-        <div className="weather-wrapper">
+        <div className={`${this.state.data.list ? "weather-wrapper" : " "}`}>
 
           <p className="temp-wrapper">
+            <span className="temp-message">{tempMessage}</span>
             <span className="temp">{currentTemp}</span>
             <span className="temp-symbol">{tempSymbol}</span>
           </p>
