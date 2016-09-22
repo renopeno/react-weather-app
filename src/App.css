@@ -1,22 +1,54 @@
+/*
+  orange: ff9068;
+*/
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
 body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
-  color: #222;
+  color: #fff;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(#834474, #f1a7df);
+}
+.weather-wrapper {
+  display: block;
+  max-width: 768px;
+  margin: 20px auto;
+  background: linear-gradient(50deg,#fac7ed,#f1a7df);
+  box-shadow: 2px 2px 5px rgba(0,0,0,.15);
+  border-radius: 3px;
+  padding: 10px;
+  margin-top: 5em;
 }
 
 h1 {
+  font-size: 5em;
+  margin-top: 100px;
+  margin-bottom: 75px;
   text-align: center;
 }
 
 form {
   text-align: center;
 }
+label {
+  font-size: 3em;
+  font-weight: 100;
+}
 
 input {
+  background: rgba(255, 255, 255, 0.1);;
+  color: #fff;
   border: none;
-  border-bottom: 1px dotted black;
+  border-bottom: 1px solid #fff;
   margin-left: 0.5em;
   font-size: 1em;
+  font-weight: 200;
   outline: none;
 }
 
@@ -31,13 +63,15 @@ input {
 }
 
 .temp {
-  font-size: 64px;
+  font-size: 4em;
+  font-weight: 100;
 }
 
 .temp-symbol {
   position: absolute;
-  top: 13px;
-  margin-left: 4px;
+  font-size: 2.5em;
+  top: 5px;
+  margin-left: 10px;
 }
 
 .temp-date {

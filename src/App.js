@@ -5,8 +5,6 @@ import xhr from 'xhr';
 
 class App extends React.Component {
 
-
-
   state = {
     location: '',
     data: {}
@@ -41,16 +39,17 @@ class App extends React.Component {
   };
 
   render() {
-    let currentTemp = '';
+    let currentTemp = ' ';
     let tempSymbol = '';
 
     if (this.state.data.list) {
-      currentTemp = 'Temp: ' + this.state.data.list[0].main.temp;
+      currentTemp = this.state.data.list[0].main.temp;
       tempSymbol = '°C';
     }
 
     return (
       <div>
+
         <h1>Weather</h1>
         <form onSubmit={this.fetchData}>
           <label>I want to know the weather for
@@ -62,10 +61,14 @@ class App extends React.Component {
                />
           </label>
         </form>
-        <p className="temp-wrapper">
-          <span className="temp">{currentTemp}</span>
-          <span className="temp-symbol">{tempSymbol}</span>
-        </p>
+        <div className="weather-wrapper">
+
+          <p className="temp-wrapper">
+            <span className="temp">{currentTemp}</span>
+            <span className="temp-symbol">{tempSymbol}</span>
+          </p>
+        </div>
+
       </div>
     );
   }
