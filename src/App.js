@@ -15,7 +15,7 @@ class App extends React.Component {
 
     const location = encodeURIComponent(this.state.location);
 
-    const urlPrefix='http://api.openweathermap.org/data/2.5/forecast?q=';
+    const urlPrefix='http://api.openweathermap.org/data/2.5/weather?q=';
     const urlSufix='&APPID=ebe1b79b67f8cf7cb38c7531a6262f00&units=metric';
 
     const self = this;
@@ -45,8 +45,8 @@ class App extends React.Component {
     let tempMessageCity = '';
     const loc = this.state.location;
 
-    if (this.state.data.list) {
-      currentTemp = this.state.data.list[0].main.temp;
+    if (this.state.data.main) {
+      currentTemp = this.state.data.main.temp;
       tempSymbol = '°C';
       tempMessageCity = loc.charAt(0).toUpperCase() + loc.slice(1,loc.length);
       tempMessage = 'Current temp in ' + tempMessageCity + ' is';
@@ -66,7 +66,7 @@ class App extends React.Component {
                />
           </label>
         </form>
-        <div className={`${this.state.data.list ? "weather-wrapper" : " "}`}>
+        <div className={`${this.state.data.main ? "weather-wrapper" : " "}`}>
 
           <p className="temp-wrapper">
             <span className="temp-message">{tempMessage}</span>

@@ -12,7 +12,6 @@ body {
   font-size: 16px;
   color: #fff;
   min-height: 100vh;
-  overflow: hidden;
   background: linear-gradient(#834474, #f1a7df);
   padding-left: 10px;
   padding-right: 10px;
@@ -53,6 +52,7 @@ form {
 label {
   font-size: 3em;
   font-weight: 100;
+  line-height: 1.5;
 }
 
 input {
