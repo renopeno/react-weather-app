@@ -3,11 +3,15 @@ import React from 'react';
 import './App.css';
 import xhr from 'xhr';
 
+import Plot from './Plot.js';
+
 class App extends React.Component {
 
   state = {
     location: '',
-    data: {}
+    data: {},
+    dates: [],
+    temps: [],
   };
 
   fetchData = (e) => {
@@ -15,7 +19,7 @@ class App extends React.Component {
 
     const location = encodeURIComponent(this.state.location);
 
-    const urlPrefix='http://api.openweathermap.org/data/2.5/weather?q=';
+    const urlPrefix='http://api.openweathermap.org/data/2.5/forecast?q=';
     const urlSufix='&APPID=ebe1b79b67f8cf7cb38c7531a6262f00&units=metric';
 
     const self = this;
@@ -25,8 +29,25 @@ class App extends React.Component {
     xhr({
         url: url
       }, function (err, data) {
+        const body = JSON.parse(data.body);
+        const list = body.list;
+        let dates = [];
+        let temps = [];
+
+        for (var i = 0; i < list.length; i++) {
+          dates.push(list[i].dt_txt);
+          temps.push(list[i].main.temp);
+        }
+
+
         self.setState({
-          data: JSON.parse(data.body)
+          data: body,
+          dates: dates,
+          temps: temps,
+          selected: {
+            date: '',
+            temp: null
+          }
         });
       }
     );
@@ -45,8 +66,8 @@ class App extends React.Component {
     let tempMessageCity = '';
     const loc = this.state.location;
 
-    if (this.state.data.main) {
-      currentTemp = this.state.data.main.temp;
+    if (this.state.data.list) {
+      currentTemp = this.state.data.list[0].main.temp;
       tempSymbol = '°C';
       tempMessageCity = loc.charAt(0).toUpperCase() + loc.slice(1,loc.length);
       tempMessage = 'Current temp in ' + tempMessageCity + ' is';
@@ -66,14 +87,28 @@ class App extends React.Component {
                />
           </label>
         </form>
-        <div className={`${this.state.data.main ? "weather-wrapper" : " "}`}>
+        {(this.state.data.list) ? (
+          <div>
+            <div className="weather-wrapper">
 
-          <p className="temp-wrapper">
-            <span className="temp-message">{tempMessage}</span>
-            <span className="temp">{currentTemp}</span>
-            <span className="temp-symbol">{tempSymbol}</span>
-          </p>
-        </div>
+              <p className="temp-wrapper">
+                <span className="temp-message">{tempMessage}</span>
+                <span className="temp">{currentTemp}</span>
+                <span className="temp-symbol">{tempSymbol}</span>
+              </p>
+            </div>
+
+            <h2>Forecast</h2>
+            <div className="weather-wrapper">
+              <Plot
+                xData={this.state.dates}
+                yData={this.state.temps}
+                type="scatter"
+              />
+            </div>
+          </div>
+        ) : null }
+
 
       </div>
     );
