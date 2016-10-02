@@ -1,7 +1,9 @@
 // App.js
+
 import React from 'react';
 import './App.css';
 import xhr from 'xhr';
+import myKeys from './config.js';
 
 import Plot from './Plot.js';
 
@@ -18,9 +20,10 @@ class App extends React.Component {
     e.preventDefault();
 
     const location = encodeURIComponent(this.state.location);
+    const myKey = myKeys.API_KEY;
 
     const urlPrefix='http://api.openweathermap.org/data/2.5/forecast?q=';
-    const urlSufix='&APPID=ebe1b79b67f8cf7cb38c7531a6262f00&units=metric';
+    const urlSufix='&APPID='+ myKey +'&units=metric';
 
     const self = this;
 
