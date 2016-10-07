@@ -2,6 +2,7 @@
   "name": "weather-app",
   "version": "0.0.1",
   "private": true,
+  "homepage": "http://www.renatomandic.com/weather",
   "devDependencies": {
     "react-scripts": "0.4.3"
   },
